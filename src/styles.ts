@@ -186,13 +186,13 @@ export const createStyles = (_theme?: Theme) => {
   `
   const theme = Object.assign<Theme, Theme | undefined>(
     {
-      themeColor: 'rgb(0, 93, 255)',
+      themeColor: '#26c6da',
       bg: '#fff',
       textColor: 'inherit',
       emotionBg: '#f7fafc',
       emotionHoverBg: '#edf2f7',
       inputBorderColor: '#cbd5e0',
-      inputShadowColor: 'rgba(0, 93, 255, 0.6)',
+      inputShadowColor: '#26c6da',
       iconButtonColor: '#cbd5e0',
       iconButtonHoverColor: '#999',
       buttonDisabledBg: '#E2E8F0',
