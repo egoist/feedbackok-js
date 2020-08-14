@@ -5,6 +5,7 @@ import { Config } from './config'
 import { preload } from './preload'
 
 const TRIGGER_ATTR_NAME = `data-feedbackok-trigger`
+const INLINE_ATTR_NAME = `data-feedbackok-inline`
 const IFRAME_ID = `feedbackok-iframe`
 let popper: PopperInstance | undefined
 
@@ -32,16 +33,15 @@ window.addEventListener('message', (e) => {
   if (data.type === 'feedbackok-close') {
     close()
   } else if (data.type === 'feedbackok-resize') {
-    const iframe = getExistingIframe()
-    console.log(data)
+    const iframe = getExistingIframe(data.iframe)
     if (iframe) {
       iframe.height = data.data
     }
   }
 })
 
-const getExistingIframe = () => {
-  const existing = document.getElementById(IFRAME_ID) as HTMLIFrameElement
+const getExistingIframe = (id = IFRAME_ID) => {
+  const existing = document.getElementById(id) as HTMLIFrameElement
   if (existing) {
     return existing
   }
@@ -84,7 +84,40 @@ const ensureIframe = () => {
   return iframe
 }
 
+const replaceInline = () => {
+  const els = document.body.querySelectorAll(
+    `[${INLINE_ATTR_NAME}]`,
+  ) as NodeListOf<HTMLElement>
+  els.forEach(($el, index) => {
+    const $iframe = getExistingIframe()
+    if ($iframe) {
+      const $newIframe = $iframe.cloneNode(true) as HTMLIFrameElement
+      $newIframe.id = `${$newIframe.id}_${index}`
+      $el.appendChild($newIframe)
+      showIframe($el, $newIframe, INLINE_ATTR_NAME)
+      $el.removeAttribute(INLINE_ATTR_NAME)
+    }
+  })
+}
+
+const showIframe = (
+  $el: HTMLElement,
+  $iframe: HTMLIFrameElement,
+  pidAttr: string,
+) => {
+  $iframe.src = getIframeSrc({
+    ...configFromScript,
+    from: $el.getAttribute(`data-feedbackok-from`) || undefined,
+    pid: $el.getAttribute(pidAttr) || configFromScript.pid,
+    popup: true,
+    iframe: $iframe.id,
+  })
+  $iframe.style.display = 'block'
+}
+
 ensureIframe()
+
+replaceInline()
 
 document.addEventListener('mouseover', (e: any) => {
   const $el: HTMLElement | null =
@@ -113,13 +146,7 @@ document.addEventListener('click', (e: any) => {
   const iframe = getExistingIframe()
 
   if (iframe) {
-    iframe.src = getIframeSrc({
-      ...configFromScript,
-      from: $el.getAttribute('data-feedbackok-from') || undefined,
-      pid: $el.getAttribute(TRIGGER_ATTR_NAME) || configFromScript.pid,
-      popup: true,
-    })
-    iframe.style.display = 'block'
+    showIframe($el, iframe, TRIGGER_ATTR_NAME)
     popper = createPopper($el, iframe, {
       placement: 'bottom',
       modifiers: [
@@ -137,4 +164,5 @@ document.addEventListener('click', (e: any) => {
 // Support turbolinks
 document.addEventListener('turbolinks:load', () => {
   ensureIframe()
+  replaceInline()
 })

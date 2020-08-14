@@ -271,6 +271,9 @@ export const createStyles = (_theme?: Theme) => {
         color: theme.buttonDisabledColor,
         cursor: 'default',
       },
+      '&:focus': {
+        outline: 'none',
+      },
     }),
   }
 

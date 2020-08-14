@@ -12,7 +12,7 @@ import { Config } from './config'
 import { useProjectData } from './useProjectData'
 import { API_ENDPOINT } from './constants'
 import { Spinner } from './Spinner'
-import { closeIframe, getParent } from './iframe-utils'
+import { closeIframe, getParent, resizeIframe } from './iframe-utils'
 
 export const FeedbackOK: FunctionalComponent<{
   config: Config
@@ -38,13 +38,12 @@ export const FeedbackOK: FunctionalComponent<{
       const parent = getParent()
       if (parent && rootRef.current) {
         let height = rootRef.current.clientHeight
-        if (height < 189) {
-          height = 189
+        if (height < 180) {
+          height = 180
         }
-        window.parent.postMessage(
-          { type: 'feedbackok-resize', data: height },
-          '*',
-        )
+        if (config.iframe) {
+          resizeIframe(height, config.iframe)
+        }
       }
     })
   }, [emotionIndex, successMessage, errorMessage, project.isLoading])
@@ -88,7 +87,7 @@ export const FeedbackOK: FunctionalComponent<{
           right: '20px',
         }),
       )}
-      onClick={closeIframe}
+      onClick={() => config.iframe && closeIframe(config.iframe)}
     >
       <CloseIcon />
     </button>
@@ -105,6 +104,7 @@ export const FeedbackOK: FunctionalComponent<{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              height: '100vh',
             }),
           )}
         >
@@ -188,7 +188,7 @@ export const FeedbackOK: FunctionalComponent<{
                   right: 0,
                 }),
               )}
-              onClick={closeIframe}
+              onClick={() => config.iframe && closeIframe(config.iframe)}
             >
               <CloseIcon />
             </button>

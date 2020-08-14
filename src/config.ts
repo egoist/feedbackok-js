@@ -3,4 +3,5 @@ export type Config = {
   debug?: boolean
   from?: string
   popup?: boolean
+  iframe?: string
 }
