@@ -38,8 +38,8 @@ export const FeedbackOK: FunctionalComponent<{
       const parent = getParent()
       if (parent && rootRef.current) {
         let height = rootRef.current.clientHeight
-        if (height < 180) {
-          height = 180
+        if (height < 166) {
+          height = 166
         }
         if (config.iframe) {
           resizeIframe(height, config.iframe)

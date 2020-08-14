@@ -77,8 +77,8 @@ const ensureIframe = () => {
   iframe.style.boxShadow = `0 18px 50px -10px rgba(0, 0, 0, 0.2)`
   iframe.style.overflow = 'hidden'
   iframe.style.borderRadius = '6px'
-  iframe.width = '320px'
-  iframe.height = '180px'
+  iframe.width = '320'
+  iframe.height = '166'
 
   document.body.appendChild(iframe)
   return iframe
