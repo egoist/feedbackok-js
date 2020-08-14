@@ -38,7 +38,9 @@ function createConfig(input, { minify }) {
         plugins: [['emotion', { sourceMap: false }]],
         exclude: 'node_modules/**',
       }),
-      commonjs(),
+      commonjs({
+        extensions: ['.js'],
+      }),
       nodeResolve(),
       replace({
         values: {

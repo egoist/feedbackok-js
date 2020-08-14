@@ -6,7 +6,12 @@ process.env.NODE_ENV = 'development'
 const { default: configs } = require('../rollup.config')
 
 async function main() {
-  watch(configs)
+  watch(configs).on('event', (event) => {
+    if (event.code === 'ERROR') {
+      console.error(event.error)
+      process.exitCode = 1
+    }
+  })
 
   const server = express()
 
