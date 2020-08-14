@@ -3,7 +3,7 @@
   "scripts": {
     "build": "npm run clean && rollup -c",
     "dev": "npm run clean && node -r sucrase/register scripts/dev",
-    "clean": "rm -rf public/*.js"
+    "clean": "rm -rf public/*.js public/*.js.map"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
