@@ -18,6 +18,7 @@ export const createStyles = (_theme?: Theme) => {
   injectGlobal({
     body: {
       margin: 0,
+      overflow: 'hidden',
     },
     '*': {
       boxSizing: 'border-box',
@@ -25,13 +26,8 @@ export const createStyles = (_theme?: Theme) => {
   })
 
   injectGlobal`
-  body::-webkit-scrollbar {
-    display: none;
-  }
-
-  body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  html, body, #root {
+    height: 100%;
   }
 
   .success-checkmark {
@@ -207,6 +203,8 @@ export const createStyles = (_theme?: Theme) => {
   const styles = {
     root: css({
       fontFamily: 'system-ui, sans-serif',
+      width: '100%',
+      height: '100%',
       padding: '20px',
       borderRadius: '10px',
       minWidth: '260px',

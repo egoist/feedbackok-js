@@ -27,16 +27,8 @@ const close = () => {
 }
 
 window.addEventListener('message', (e) => {
-  const data = e.data
-  if (typeof data !== 'object') return
-  if (data.type === 'feedbackok-close') {
+  if (e.data === 'feedbackok-close') {
     close()
-  } else if (data.type === 'feedbackok-resize') {
-    const iframe = getExistingIframe()
-    console.log(data)
-    if (iframe) {
-      iframe.height = data.data
-    }
   }
 })
 

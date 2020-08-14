@@ -8,6 +8,12 @@ const getConfigFromHash = () => {
   return parse(location.hash.replace(/^#/, '')) as any
 }
 
+const close = () => {
+  typeof window !== 'undefined' &&
+    window.parent &&
+    window.parent.postMessage('feedbackok-close', '*')
+}
+
 export const App = () => {
   const [config, setConfig] = useState<Config | undefined>(undefined)
 
@@ -24,5 +30,5 @@ export const App = () => {
     return null
   }
 
-  return <FeedbackOK config={config} />
+  return <FeedbackOK config={config} close={close} />
 }
