@@ -109,7 +109,7 @@ const showIframe = (
     ...configFromScript,
     from: $el.getAttribute(`data-feedbackok-from`) || undefined,
     pid: $el.getAttribute(pidAttr) || configFromScript.pid,
-    popup: true,
+    popup: pidAttr !== INLINE_ATTR_NAME,
     iframe: $iframe.id,
   })
   $iframe.style.display = 'block'

@@ -1,7 +1,6 @@
 import { h, FunctionalComponent, Fragment } from 'preact'
-import { useState, useEffect, useRef, useLayoutEffect } from 'preact/hooks'
+import { useState, useEffect, useRef } from 'preact/hooks'
 import clsx from 'clsx'
-import { BackIcon } from './BackIcon'
 import { CloseIcon } from './CloseIcon'
 import { createStyles } from './styles'
 import { css } from 'emotion'

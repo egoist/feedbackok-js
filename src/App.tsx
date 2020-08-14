@@ -5,7 +5,13 @@ import { useState, useEffect } from 'preact/hooks'
 import { Config } from './config'
 
 const getConfigFromHash = () => {
-  return parse(location.hash.replace(/^#/, '')) as any
+  const config = parse(location.hash.replace(/^#/, '')) as any
+  Object.keys(config).forEach((key) => {
+    if (config[key] === 'false') {
+      config[key] = false
+    }
+  })
+  return config
 }
 
 export const App = () => {
