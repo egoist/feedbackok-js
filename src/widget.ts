@@ -22,7 +22,9 @@ const close = () => {
     iframe.style.display = 'none'
   }
   if (popper) {
-    popper.destroy()
+    try {
+      popper.destroy()
+    } catch (err) {}
     popper = undefined
   }
 }
@@ -163,6 +165,7 @@ document.addEventListener('click', (e: any) => {
 
 // Support turbolinks
 document.addEventListener('turbolinks:load', () => {
+  close()
   ensureIframe()
   replaceInline()
 })

@@ -1,6 +1,6 @@
 import { h } from 'preact'
 import { parse } from 'querystringify'
-import { FeedbackOK } from './FeedbackOK'
+import { FeedbackOK } from './FeedbackForm'
 import { useState, useEffect } from 'preact/hooks'
 import { Config } from './config'
 
