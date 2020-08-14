@@ -2,8 +2,8 @@ import { h } from 'preact'
 
 export const IssueIcon = () => (
   <svg
-    width="80"
-    height="80"
+    width="70"
+    height="70"
     viewBox="0 0 155 155"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

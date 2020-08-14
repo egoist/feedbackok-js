@@ -5,8 +5,8 @@ export const OtherIcon = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 155 155"
-      width="80"
-      height="80"
+      width="70"
+      height="70"
     >
       <circle cx="55.891" cy="33.391" r="2.484" fill="#fb9e74" />
       <circle
