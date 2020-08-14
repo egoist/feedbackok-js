@@ -71,7 +71,7 @@ const ensureIframe = () => {
 
   const iframe = document.createElement('iframe')
   iframe.id = IFRAME_ID
-  iframe.src = getIframeSrc(configFromScript)
+  iframe.src = getIframeSrc({ ...configFromScript, pid: undefined })
   iframe.style.display = 'none'
   iframe.style.border = 'none'
   iframe.style.boxShadow = `0 18px 50px -10px rgba(0, 0, 0, 0.2)`
