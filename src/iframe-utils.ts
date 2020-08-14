@@ -5,10 +5,10 @@ export function getParent() {
   return typeof window !== 'undefined' && window.parent
 }
 
-export function closeIframe(iframe: string) {
+export function closeIframe() {
   const parent = getParent()
   if (parent) {
-    window.parent.postMessage({ type: 'feedbackok-close', iframe }, '*')
+    window.parent.postMessage({ type: 'feedbackok-close' }, '*')
   }
 }
 

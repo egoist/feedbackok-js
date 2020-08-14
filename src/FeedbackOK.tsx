@@ -86,7 +86,7 @@ export const FeedbackOK: FunctionalComponent<{
           right: '20px',
         }),
       )}
-      onClick={() => config.iframe && closeIframe(config.iframe)}
+      onClick={closeIframe}
     >
       <CloseIcon />
     </button>
@@ -187,7 +187,7 @@ export const FeedbackOK: FunctionalComponent<{
                   right: 0,
                 }),
               )}
-              onClick={() => config.iframe && closeIframe(config.iframe)}
+              onClick={closeIframe}
             >
               <CloseIcon />
             </button>
