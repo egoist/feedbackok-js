@@ -13,6 +13,7 @@ function createConfig(input, { minify }) {
       dir: 'public',
       entryFileNames: minify ? '[name].js' : '[name].unminified.js',
       format: 'iife',
+      sourcemap: true,
     },
     plugins: [
       esbuild({
