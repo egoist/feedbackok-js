@@ -1,8 +1,6 @@
-import { h } from 'preact'
+import * as React from 'react'
 import { parse } from 'querystringify'
-import { FeedbackOK } from './FeedbackForm'
-import { useState, useEffect } from 'preact/hooks'
-import { Config } from './config'
+import { FeedbackForm, FormConfig } from 'feedbackok-react'
 
 const getConfigFromHash = () => {
   const config = parse(location.hash.replace(/^#/, '')) as any
@@ -15,9 +13,9 @@ const getConfigFromHash = () => {
 }
 
 export const App = () => {
-  const [config, setConfig] = useState<Config | undefined>(undefined)
+  const [config, setConfig] = React.useState<FormConfig | undefined>(undefined)
 
-  useEffect(() => {
+  React.useEffect(() => {
     setConfig(getConfigFromHash())
     const handler = () => {
       setConfig(getConfigFromHash())
@@ -30,5 +28,5 @@ export const App = () => {
     return null
   }
 
-  return <FeedbackOK config={config} />
+  return <FeedbackForm config={config} />
 }

@@ -1,7 +1,7 @@
 import { createPopper, Instance as PopperInstance } from '@popperjs/core'
 import { stringify } from 'querystringify'
 import { getCurrentScript } from 'tiny-current-script'
-import { Config } from './config'
+import type { Config } from 'feedbackok'
 import { preload } from './preload'
 
 const TRIGGER_ATTR_NAME = `data-feedbackok-trigger`

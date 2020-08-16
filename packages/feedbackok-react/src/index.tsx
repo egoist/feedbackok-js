@@ -1,5 +1,4 @@
-import { h, FunctionalComponent, Fragment } from 'preact'
-import { useState, useEffect, useRef } from 'preact/hooks'
+import * as React from 'react'
 import clsx from 'clsx'
 import { CloseIcon } from './CloseIcon'
 import { createStyles } from './styles'
@@ -7,39 +6,43 @@ import { css } from 'emotion'
 import { IssueIcon } from './IssueIcon'
 import { IdeaIcon } from './IdeaIcon'
 import { OtherIcon } from './OtherIcon'
-import { Config } from './config'
+import type { Config } from './config'
 import { useProjectData } from './useProjectData'
 import { API_ENDPOINT } from './constants'
 import { Spinner } from './Spinner'
 import { closeIframe, getParent, resizeIframe } from './iframe-utils'
+import { SetRequired } from './types/set-required'
 
-export const FeedbackOK: FunctionalComponent<{
-  config: Config
+export type { Config }
+
+export type FormConfig = SetRequired<Config, 'pid'>
+
+export * from './constants'
+
+export const FeedbackForm: React.FC<{
+  config: FormConfig
 }> = ({ config }) => {
   if (!config.pid) {
     return null
   }
 
   const { styles, theme } = createStyles()
-  const [emotionIndex, setEmotionIndex] = useState<number | undefined>(
+  const [emotionIndex, setEmotionIndex] = React.useState<number | undefined>(
     undefined,
   )
-  const [content, setContent] = useState('')
-  const [successMessage, setSuccessMessage] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const rootRef = useRef<HTMLDivElement>()
+  const [content, setContent] = React.useState('')
+  const [successMessage, setSuccessMessage] = React.useState('')
+  const [errorMessage, setErrorMessage] = React.useState('')
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const rootRef = React.useRef<HTMLDivElement>(null)
 
   const project = useProjectData(config.pid)
 
-  useEffect(() => {
+  React.useEffect(() => {
     setTimeout(() => {
       const parent = getParent()
       if (parent && rootRef.current) {
         let height = rootRef.current.clientHeight
-        if (height < 166) {
-          height = 166
-        }
         if (config.iframe) {
           resizeIframe(height, config.iframe)
         }
@@ -79,7 +82,7 @@ export const FeedbackOK: FunctionalComponent<{
 
   const closeButtonForResult = config.popup && (
     <button
-      class={clsx(
+      className={clsx(
         styles.iconButton,
         css({
           top: '20px',
@@ -94,10 +97,10 @@ export const FeedbackOK: FunctionalComponent<{
 
   if (project.isLoading) {
     return (
-      <Fragment>
+      <>
         <div
           ref={rootRef}
-          class={clsx(
+          className={clsx(
             styles.root,
             css({
               display: 'flex',
@@ -109,54 +112,50 @@ export const FeedbackOK: FunctionalComponent<{
         >
           <Spinner size="30px" themeColor={theme.themeColor} />
         </div>
-      </Fragment>
+      </>
     )
   }
 
   if (project.error || errorMessage) {
     return (
-      <Fragment>
+      <div ref={rootRef} className={styles.root}>
         <div
-          ref={rootRef}
-          class={clsx(
-            styles.root,
-            css({
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }),
-          )}
+          className={css({
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          })}
         >
           {closeButtonForResult}
           {project.error || errorMessage}
         </div>
-      </Fragment>
+      </div>
     )
   }
 
   if (successMessage) {
     return (
-      <div class={styles.root} ref={rootRef}>
+      <div className={styles.root} ref={rootRef}>
         {closeButtonForResult}
-        <div class="success-checkmark">
-          <div class="check-icon">
-            <span class="icon-line line-tip" />
-            <span class="icon-line line-long" />
-            <div class="icon-circle" />
-            <div class="icon-fix" />
+        <div className="success-checkmark">
+          <div className="check-icon">
+            <span className="icon-line line-tip" />
+            <span className="icon-line line-long" />
+            <div className="icon-circle" />
+            <div className="icon-fix" />
           </div>
         </div>
         <div
-          class={css`
+          className={css`
             text-align: center;
           `}
         >
           {successMessage}
         </div>
-        <div class={css({ textAlign: 'center', paddingTop: '5px' })}>
+        <div className={css({ textAlign: 'center', paddingTop: '5px' })}>
           <span
             onClick={reset}
-            class={css({
+            className={css({
               borderRadius: '3px',
               color: theme.themeColor,
               cursor: 'pointer',
@@ -171,17 +170,17 @@ export const FeedbackOK: FunctionalComponent<{
   }
 
   return (
-    <div class={styles.root} ref={rootRef}>
+    <div className={styles.root} ref={rootRef}>
       {project.data.emotions && (
-        <div class={styles.header}>
-          <div class={styles.title} style="margin:0 20px;">
+        <div className={styles.header}>
+          <div className={styles.title} style={{ margin: '0 20px' }}>
             {emotionIndex === undefined
               ? `Give us feedback`
               : `What's on your mind?`}
           </div>
           {config.popup && (
             <button
-              class={clsx(
+              className={clsx(
                 styles.iconButton,
                 css({
                   right: 0,
@@ -195,12 +194,14 @@ export const FeedbackOK: FunctionalComponent<{
         </div>
       )}
 
-      <Fragment>
-        <div class={css({ display: 'flex', justifyContent: 'space-around' })}>
+      <>
+        <div
+          className={css({ display: 'flex', justifyContent: 'space-around' })}
+        >
           {project.data.emotions.map((emotion, index) => {
             return (
               <div
-                class={css({
+                className={css({
                   borderRadius: '10px',
                   cursor: 'pointer',
                   display: 'flex',
@@ -229,7 +230,7 @@ export const FeedbackOK: FunctionalComponent<{
                     <OtherIcon />
                   ))}
                 <span
-                  class={css({
+                  className={css({
                     textTransform: 'capitalize',
                     fontSize: project.data.notEmoji ? '1rem' : '2.3rem',
                   })}
@@ -242,7 +243,7 @@ export const FeedbackOK: FunctionalComponent<{
         </div>
         {emotionIndex === undefined && (
           <div
-            class={css({
+            className={css({
               textAlign: 'center',
               marginTop: '20px',
               fontSize: '12px',
@@ -252,7 +253,7 @@ export const FeedbackOK: FunctionalComponent<{
           >
             Powered by{' '}
             <a
-              class={css({
+              className={css({
                 fontWeight: 600,
                 color: 'inherit',
                 textDecoration: 'none',
@@ -264,12 +265,12 @@ export const FeedbackOK: FunctionalComponent<{
             </a>
           </div>
         )}
-      </Fragment>
+      </>
 
       {typeof emotionIndex === 'number' && (
-        <form onSubmit={handleSubmit} class={css({ marginTop: '20px' })}>
+        <form onSubmit={handleSubmit} className={css({ marginTop: '20px' })}>
           <textarea
-            class={css({
+            className={css({
               width: '100%',
               borderRadius: '6px',
               border: `1px solid ${theme.inputBorderColor}`,
@@ -286,7 +287,7 @@ export const FeedbackOK: FunctionalComponent<{
           />
           <button
             type="submit"
-            class={styles.submitButton}
+            className={styles.submitButton}
             disabled={!content || isSubmitting}
           >
             {isSubmitting && <Spinner themeColor={theme.themeColor} />} Send

@@ -1,0 +1,10 @@
+{
+  "name": "feedbackok-widget",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "rm -rf dist/*.js dist/*.js.map && rollup -c"
+  },
+  "devDependencies": {
+    "feedbackok-react": "*"
+  }
+}

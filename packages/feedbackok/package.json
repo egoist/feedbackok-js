@@ -1,0 +1,20 @@
+{
+  "name": "feedbackok",
+  "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && rollup -c"
+  },
+  "dependencies": {
+    "feedbackok-react": "*"
+  },
+  "devDependencies": {
+    "preact": "^10.4.7",
+    "@types/react-dom": "^16.9.8"
+  }
+}

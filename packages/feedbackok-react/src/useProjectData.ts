@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'preact/hooks'
+import * as React from 'react'
 import { API_ENDPOINT } from './constants'
 
 export function useProjectData(pid: string) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [data, setData] = useState<{
+  const [isLoading, setIsLoading] = React.useState(true)
+  const [error, setError] = React.useState('')
+  const [data, setData] = React.useState<{
     emotions: string[]
     notEmoji: boolean
   }>({
@@ -12,7 +12,7 @@ export function useProjectData(pid: string) {
     notEmoji: false,
   })
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!pid) return
 
     setIsLoading(true)

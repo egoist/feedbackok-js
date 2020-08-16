@@ -1,4 +1,4 @@
-import { h } from 'preact'
+import * as React from 'react'
 
 export const CloseIcon = () => (
   <svg viewBox="0 0 20 20" fill="currentColor">
