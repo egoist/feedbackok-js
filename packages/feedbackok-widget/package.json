@@ -1,6 +1,14 @@
 {
   "name": "feedbackok-widget",
   "version": "0.0.0",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "EGOIST",
+    "email": "0x142857@gmail.com"
+  },
   "scripts": {
     "build": "rm -rf dist/*.js dist/*.js.map && rollup -c"
   },

@@ -1,7 +1,7 @@
 {
-  "private": true,
   "name": "feedbackok-react",
   "version": "0.0.0",
+  "description": "React component for Feedback OK",
   "scripts": {
     "build": "rm -rf dist && rollup -c"
   },
@@ -11,6 +11,11 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "EGOIST",
+    "email": "0x142857@gmail.com"
+  },
   "dependencies": {
     "@popperjs/core": "^2.4.4",
     "clsx": "^1.1.1",

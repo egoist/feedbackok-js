@@ -1,6 +1,7 @@
 {
   "name": "feedbackok",
   "version": "0.0.0",
+  "description": "Framework-agnostic library for Feedback OK",
   "files": [
     "dist"
   ],
@@ -9,6 +10,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rm -rf dist && rollup -c"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "EGOIST",
+    "email": "0x142857@gmail.com"
   },
   "dependencies": {
     "feedbackok-react": "*"
