@@ -8,6 +8,8 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@egoist/prettier-config": "^0.1.0",
+    "@pika/react": "^16.13.1",
+    "@pika/react-dom": "^16.13.1",
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
@@ -22,7 +24,9 @@
     "rollup-plugin-dts": "^1.4.10",
     "rollup-plugin-esbuild": "^2.4.2",
     "sucrase": "^3.15.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "vite": "^1.0.0-rc.4",
+    "vite-plugin-react": "^3.0.2"
   },
   "workspaces": [
     "packages/*"

@@ -1,6 +1,3 @@
-const getIframeId = () =>
-  typeof window !== 'undefined' && window.frameElement && window.frameElement.id
-
 export function getParent() {
   return typeof window !== 'undefined' && window.parent
 }

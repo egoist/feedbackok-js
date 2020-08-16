@@ -106,7 +106,7 @@ export const FeedbackForm: React.FC<{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              height: '100vh',
+              height: '169px',
             }),
           )}
         >
@@ -201,6 +201,7 @@ export const FeedbackForm: React.FC<{
           {project.data.emotions.map((emotion, index) => {
             return (
               <div
+                key={index}
                 className={css({
                   borderRadius: '10px',
                   cursor: 'pointer',
@@ -283,7 +284,7 @@ export const FeedbackForm: React.FC<{
               },
             })}
             value={content}
-            onInput={(e: any) => setContent(e.target.value)}
+            onChange={(e: any) => setContent(e.target.value)}
           />
           <button
             type="submit"
