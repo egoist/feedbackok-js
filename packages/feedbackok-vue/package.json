@@ -1,0 +1,22 @@
+{
+  "name": "feedbackok-vue",
+  "version": "0.0.0",
+  "description": "Vue component for Feedback OK",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && rollup -c"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "EGOIST",
+    "email": "0x142857@gmail.com"
+  },
+  "devDependencies": {
+    "feedbackok": "*"
+  }
+}

@@ -1,5 +1,5 @@
 node_modules
-dist
-public/*.js
-public/*.js.map
-.cache
+**/dist/**/*.js
+**/dist/**/*.ts
+**/dist/**/*.mjs
+**/dist/**/*.map
