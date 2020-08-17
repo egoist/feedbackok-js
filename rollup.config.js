@@ -19,8 +19,6 @@ function createConfig(input, { minify }) {
     plugins: [
       esbuild({
         target: 'es2018',
-        jsxFactory: 'h',
-        jsxFragment: 'Fragment',
         minify,
       }),
       buble(),
