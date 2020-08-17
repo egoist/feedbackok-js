@@ -176,7 +176,7 @@ if (document.readyState === 'interactive') {
 
 // Support turbolinks
 document.addEventListener('turbolinks:load', () => {
-  close()
+  hidePopper()
   ensurePopupIframe()
   replaceInline()
 })
