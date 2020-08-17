@@ -1,8 +1,9 @@
 import nodeResolve from '@rollup/plugin-node-resolve'
 import esbuild from 'rollup-plugin-esbuild'
 import commonjs from '@rollup/plugin-commonjs'
-import babel from '@rollup/plugin-babel'
 import replace from '@rollup/plugin-replace'
+import alias from '@rollup/plugin-alias'
+import buble from 'rollup-plugin-buble'
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -17,27 +18,17 @@ function createConfig(input, { minify }) {
     },
     plugins: [
       esbuild({
-        target: 'es2020',
+        target: 'es2018',
         jsxFactory: 'h',
         jsxFragment: 'Fragment',
         minify,
       }),
-      babel({
-        extensions: ['.js', '.ts', '.tsx', '.mjs'],
-        configFile: false,
-        babelHelpers: 'inline',
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              targets: {
-                ie: 11,
-              },
-            },
-          ],
-        ],
-        plugins: [['emotion', { sourceMap: false }]],
-        exclude: 'node_modules/**',
+      buble(),
+      alias({
+        entries: {
+          react: 'preact/compat',
+          'react-dom': 'preact/compat',
+        },
       }),
       commonjs({
         extensions: ['.js'],
@@ -58,6 +49,6 @@ export default [
   createConfig('./src/widget.ts', { minify: true }),
   createConfig('./src/embed.tsx', { minify: true }),
 
-  createConfig('./src/widget.ts', { minify: false }),
-  createConfig('./src/embed.tsx', { minify: false }),
+  // createConfig('./src/widget.ts', { minify: false }),
+  // createConfig('./src/embed.tsx', { minify: false }),
 ]

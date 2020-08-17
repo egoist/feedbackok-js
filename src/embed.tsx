@@ -1,4 +1,5 @@
-import { h, render } from 'preact'
-import { App } from './App'
+import * as React from 'react'
+import { render } from 'react-dom'
+import { App } from './EmbedApp'
 
-render(<App />, document.getElementById('root')!)
+render(<App />, document.getElementById('app')!)

@@ -20,8 +20,30 @@
       <button data-feedbackok-trigger>
         Feedback
       </button>
-      <div data-feedbackok-inline="cf5uhp0"></div>
+      <button data-feedbackok-trigger="e9grwmq">
+        Feedback 2
+      </button>
+      <div data-feedbackok-inline="ziktm0b"></div>
     </div>
-    <script src="/cdn/widget.js" data-pid="skzcvzn" async defer></script>
+    <div id="app" x-data="createApp()">
+      <button @click="render('ziktm0b')">show 1</button>
+      <button @click="render('e9grwmq')">show 2</button>
+      <div x-ref="inline"></div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      async
+      defer
+    ></script>
+    <script src="/assets/js/widget.js" data-pid="ziktm0b" async defer></script>
+    <script>
+      function createApp() {
+        return {
+          render(pid) {
+            feedbackok_widget.renderInline(this.$refs.inline, { pid })
+          },
+        }
+      }
+    </script>
   </body>
 </html>
