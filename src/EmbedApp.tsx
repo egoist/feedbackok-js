@@ -34,6 +34,7 @@ export const App = () => {
   return (
     <FeedbackForm
       pid={pid}
+      from={options.from}
       closeHandler={
         options.inline
           ? undefined
